@@ -1,0 +1,343 @@
+:root {
+  --background: #000D1A;
+  --foreground: #ffffff;
+  --card: #001B33;
+  --card-foreground: #ffffff;
+  --primary: #FF9D00;
+  --primary-foreground: #000D1A;
+  --secondary: #001B33;
+  --secondary-foreground: #FF9D00;
+  --muted: #001B33;
+  --muted-foreground: #cccccc;
+  --border: rgba(255, 157, 0, 0.2);
+  --radius: 0.625rem;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  background-image: url("https://images.unsplash.com/photo-1749450335228-20f197d996a6?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  /* background-image: url('https://assets.codepen.io/13471/silver-glitter-background.png');*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--foreground);
+  filter: brightness(-2) contrast(1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Background overlay to maintain readability */
+.background-overlay {
+  background-color: rgba(0, 13, 26, 0.8);
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  max-width: 56rem; /* 896px */
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Separator */
+.separator {
+  height: 1px;
+  background-color: var(--border);
+  margin-bottom: 2rem;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+/* Professional Summary */
+.summary-text {
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skill-category {
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge-outline {
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  white-space: nowrap;
+}
+
+/* Cards */
+.card {
+  background-color: var(--card);
+  border: none;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--card-foreground);
+}
+
+.educard {
+  background-color: transparent --inherit;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--card-foreground);
+}
+
+.project-card {
+  background-color: var(--card);
+  border: none;
+  border-radius: var(--radius);
+  padding: 1rem;
+  color: var(--card-foreground);
+}
+
+/* Experience */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.company {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+.duration {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.achievements {
+  list-style: none;
+  padding: 0;
+}
+
+.achievements li {
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Projects */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* Education */
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.education-info {
+  flex: 1;
+}
+
+.degree {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.university {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .job-header,
+  .education-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .duration {
+    margin-left: 0;
+  }
+  
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.25rem;
+  }
+  
+  .section-title {
+    font-size: 1.125rem;
+  }
+  
+  .contact-item {
+    font-size: 0.8rem;
+  }
+}
+
