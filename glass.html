@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Senior Fullstack Developer</title>
+    <link rel="stylesheet" href="glass-styles.css">
+    <style>
+      /* Color Variables */
+:root {
+  --background: #000D1A;
+  --foreground: #ffffff;
+  --card: rgba(0, 27, 51, 0.4);
+  --card-foreground: #ffffff;
+  --primary: #FF9D00;
+  --primary-foreground: #000D1A;
+  --secondary: rgba(0, 27, 51, 0.6);
+  --secondary-foreground: #FF9D00;
+  --muted: rgba(0, 27, 51, 0.3);
+  --muted-foreground: #cccccc;
+  --border: rgba(255, 157, 0, 0.3);
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --radius: 0.875rem;
+  --glass-blur: 20px;
+  --glass-opacity: 0.1;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  /* background-image: url('https://assets.codepen.io/13471/silver-glitter-background.png');*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background overlay with enhanced glass effect */
+.background-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 13, 26, 0.8) 0%,
+    rgba(0, 27, 51, 0.6) 50%,
+    rgba(0, 13, 26, 0.9) 100%
+  );
+  backdrop-filter: blur(5px);
+  min-height: 100vh;
+  position: relative;
+}
+
+.background-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 20% 30%, 
+    rgba(255, 157, 0, 0.1) 0%, 
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 70%, 
+    rgba(236, 2, 67, 0.1) 0%, 
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Container */
+.container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glass Container Base */
+.glass-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 13, 26, 0.3),
+    0 0 0 1px rgba(255, 157, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 157, 0, 0.05) 100%
+  );
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.glass-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 13, 26, 0.4),
+    0 0 0 1px rgba(255, 157, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.profile-picture {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.profile-ring {
+  position: relative;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--primary), rgba(236, 2, 67, 0.8));
+  border-radius: 50%;
+  box-shadow: 
+    0 0 20px rgba(255, 157, 0, 0.3),
+    0 0 40px rgba(255, 157, 0, 0.1);
+}
+
+.profile-ring::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: rgba(0, 13, 26, 0.9);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+}
+
+.profile-img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top left;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.profile-picture:hover .profile-img {
+  transform: scale(1.05);
+}
+
+.header-info {
+  flex: 1;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(255, 157, 0, 0.3);
+}
+
+.title {
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.glass-item {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: calc(var(--radius) - 4px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-item:hover {
+  background: rgba(255, 157, 0, 0.1);
+  border-color: rgba(255, 157, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Glass Button */
+.glass-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: linear-gradient(135deg, rgba(255, 157, 0, 0.2), rgba(255, 157, 0, 0.1));
+  border: 1px solid rgba(255, 157, 0, 0.3);
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: inherit;
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--radius) - 4px);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 157, 0, 0.2);
+}
+
+.glass-button:hover {
+  background: linear-gradient(135deg, rgba(255, 157, 0, 0.3), rgba(255, 157, 0, 0.2));
+  border-color: rgba(255, 157, 0, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 157, 0, 0.3);
+}
+
+.glass-button:focus {
+  outline: 2px solid rgba(255, 157, 0, 0.5);
+  outline-offset: 2px;
+}
+
+/* Glass Separator */
+.glass-separator {
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 157, 0, 0.3) 20%, 
+    rgba(255, 157, 0, 0.6) 50%, 
+    rgba(255, 157, 0, 0.3) 80%, 
+    transparent 100%
+  );
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 157, 0, 0.2);
+}
+
+/* Sections */
+.section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+/* Professional Summary */
+.summary-text {
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skill-category {
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.glass-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(0, 27, 51, 0.6), rgba(0, 27, 51, 0.4));
+  color: var(--primary);
+  border: 1px solid rgba(255, 157, 0, 0.2);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 27, 51, 0.3);
+}
+
+.glass-badge:hover {
+  background: linear-gradient(135deg, rgba(255, 157, 0, 0.2), rgba(255, 157, 0, 0.1));
+  border-color: rgba(255, 157, 0, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 157, 0, 0.2);
+}
+
+.glass-badge-outline {
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+  border: 1px solid rgba(255, 157, 0, 0.3);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.glass-badge-outline:hover {
+  background: rgba(255, 157, 0, 0.1);
+  border-color: rgba(255, 157, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 13, 26, 0.3),
+    0 0 0 1px rgba(255, 157, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 157, 0, 0.05) 100%
+  );
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 13, 26, 0.4),
+    0 0 0 1px rgba(255, 157, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 157, 0, 0.2);
+}
+
+/* Experience */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.company {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+.glass-duration {
+  font-size: 0.875rem;
+  color: var(--primary);
+  white-space: nowrap;
+  margin-left: 1rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 157, 0, 0.1);
+  border-radius: calc(var(--radius) - 4px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 157, 0, 0.2);
+}
+
+.achievements {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.achievements li {
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Projects */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  padding: 1rem;
+}
+
+.project-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.project-description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Education */
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.education-info {
+  flex: 1;
+}
+
+.degree {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.university {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .job-header,
+  .education-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .glass-duration {
+    margin-left: 0;
+  }
+  
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .glass-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.25rem;
+  }
+  
+  .section-title {
+    font-size: 1.125rem;
+  }
+  
+  .contact-item,
+  .glass-button {
+    font-size: 0.8rem;
+  }
+  
+  .profile-img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .glass-container {
+    padding: 1rem;
+  }
+}
+
+/* Subtle animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.glass-badge,
+.glass-item {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-badge:nth-child(2n) {
+  animation-delay: -2s;
+}
+
+.glass-badge:nth-child(3n) {
+  animation-delay: -4s;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 13, 26, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, rgba(255, 157, 0, 0.5), rgba(236, 2, 67, 0.5));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, rgba(255, 157, 0, 0.7), rgba(236, 2, 67, 0.7));
+}
+    </style>
+</head>
+<body>
+    <!-- Background overlay with glass effect -->
+    <div class="background-overlay">
+        <div class="container">
+            <!-- Header with Glass Effect -->
+            <header class="header glass-container">
+                <div class="header-content">
+                    <!-- Profile Picture with Glass Ring -->}
+                    <div class="profile-picture">
+                        <div class="profile-ring">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" alt="Alex Johnson" class="profile-img">
+                        </div>
+                    </div>
+                    
+                    <!-- Name and Contact Info -->
+                    <div class="header-info">
+                        <h1 class="name glow-text">Alex Johnson</h1>
+                        <p class="title">Senior Fullstack Developer</p>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                    <path d="m22 7-10 5L2 7"/>
+                                </svg>
+                                alex.johnson@email.com
+                            </div>
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                (555) 123-4567
+                            </div>
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                San Francisco, CA
+                            </div>
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="m4.93 4.93 4.24 4.24"/>
+                                    <path d="m14.83 9.17 4.24-4.24"/>
+                                    <path d="m14.83 14.83 4.24 4.24"/>
+                                    <path d="m9.17 14.83-4.24 4.24"/>
+                                    <circle cx="12" cy="12" r="4"/>
+                                </svg>
+                                alexjohnson.dev
+                            </div>
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                                    <path d="M9 18c-4.51 2-5-2-7-2"/>
+                                </svg>
+                                github.com/alexjohnson
+                            </div>
+                            <div class="contact-item glass-item">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect width="4" height="12" x="2" y="9"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                                linkedin.com/in/alexjohnson
+                            </div>
+                            <!-- Download Resume Button with Glass Effect -->
+                            <button class="download-button glass-button" onclick="downloadResume()">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" x2="12" y1="15" y2="3"/>
+                                </svg>
+                                Download Resume
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="separator glass-separator"></div>
+
+            <!-- Professional Summary -->
+            <section class="section glass-container">
+                <h2 class="section-title glow-text">Professional Summary</h2>
+                <p class="summary-text">
+                    Experienced fullstack developer with 6+ years of expertise in building scalable web applications. 
+                    Proficient in modern JavaScript frameworks, cloud technologies, and database design. Passionate about 
+                    creating efficient, user-centered solutions and mentoring junior developers. Strong background in 
+                    both startup and enterprise environments.
+                </p>
+            </section>
+
+            <!-- Skills -->
+            <section class="section glass-container">
+                <h2 class="section-title glow-text">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="category-title">Frontend</h3>
+                        <div class="badges">
+                            <span class="badge glass-badge">React</span>
+                            <span class="badge glass-badge">Next.js</span>
+                            <span class="badge glass-badge">TypeScript</span>
+                            <span class="badge glass-badge">Vue.js</span>
+                            <span class="badge glass-badge">Tailwind CSS</span>
+                            <span class="badge glass-badge">Redux</span>
+                            <span class="badge glass-badge">GraphQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="category-title">Backend</h3>
+                        <div class="badges">
+                            <span class="badge glass-badge">Node.js</span>
+                            <span class="badge glass-badge">Python</span>
+                            <span class="badge glass-badge">Express.js</span>
+                            <span class="badge glass-badge">Django</span>
+                            <span class="badge glass-badge">FastAPI</span>
+                            <span class="badge glass-badge">PostgreSQL</span>
+                            <span class="badge glass-badge">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="category-title">Cloud &amp; DevOps</h3>
+                        <div class="badges">
+                            <span class="badge glass-badge">AWS</span>
+                            <span class="badge glass-badge">Docker</span>
+                            <span class="badge glass-badge">Kubernetes</span>
+                            <span class="badge glass-badge">CI/CD</span>
+                            <span class="badge glass-badge">Terraform</span>
+                            <span class="badge glass-badge">Redis</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="category-title">Tools &amp; Practices</h3>
+                        <div class="badges">
+                            <span class="badge glass-badge">Git</span>
+                            <span class="badge glass-badge">Jest</span>
+                            <span class="badge glass-badge">Cypress</span>
+                            <span class="badge glass-badge">Agile</span>
+                            <span class="badge glass-badge">TDD</span>
+                            <span class="badge glass-badge">Microservices</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience -->
+            <section class="section">
+                <h2 class="section-title glow-text">Work Experience</h2>
+                <div class="experience-list">
+                    <div class="card glass-card">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <h3 class="job-title">Senior Fullstack Developer</h3>
+                                <p class="company">TechCorp Solutions</p>
+                            </div>
+                            <span class="duration glass-duration">2021 - Present</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>• Led development of a microservices-based e-commerce platform serving 100K+ users</li>
+                            <li>• Reduced page load times by 40% through React optimization and CDN implementation</li>
+                            <li>• Mentored 3 junior developers and established code review processes</li>
+                            <li>• Implemented automated testing suite achieving 90% code coverage</li>
+                        </ul>
+                    </div>
+
+                    <div class="card glass-card">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <h3 class="job-title">Fullstack Developer</h3>
+                                <p class="company">StartupXYZ</p>
+                            </div>
+                            <span class="duration glass-duration">2019 - 2021</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>• Built MVP from scratch using React, Node.js, and PostgreSQL</li>
+                            <li>• Integrated third-party APIs including Stripe, SendGrid, and AWS S3</li>
+                            <li>• Designed and implemented RESTful APIs handling 10K+ requests daily</li>
+                            <li>• Collaborated with designers to create responsive, accessible UI components</li>
+                        </ul>
+                    </div>
+
+                    <div class="card glass-card">
+                        <div class="job-header">
+                            <div class="job-info">
+                                <h3 class="job-title">Frontend Developer</h3>
+                                <p class="company">WebAgency Pro</p>
+                            </div>
+                            <span class="duration glass-duration">2018 - 2019</span>
+                        </div>
+                        <ul class="achievements">
+                            <li>• Developed responsive websites for 15+ clients using modern JavaScript</li>
+                            <li>• Improved client website performance scores by an average of 35%</li>
+                            <li>• Created reusable component library reducing development time by 25%</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section class="section">
+                <h2 class="section-title glow-text">Notable Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card glass-card">
+                        <h3 class="project-title">Task Management SaaS</h3>
+                        <p class="project-description">
+                            Full-stack project management tool with real-time collaboration features
+                        </p>
+                        <div class="project-badges">
+                            <span class="badge-outline glass-badge-outline">React</span>
+                            <span class="badge-outline glass-badge-outline">Node.js</span>
+                            <span class="badge-outline glass-badge-outline">Socket.io</span>
+                            <span class="badge-outline glass-badge-outline">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card">
+                        <h3 class="project-title">AI-Powered Analytics Dashboard</h3>
+                        <p class="project-description">
+                            Business intelligence platform with machine learning insights
+                        </p>
+                        <div class="project-badges">
+                            <span class="badge-outline glass-badge-outline">Next.js</span>
+                            <span class="badge-outline glass-badge-outline">Python</span>
+                            <span class="badge-outline glass-badge-outline">TensorFlow</span>
+                            <span class="badge-outline glass-badge-outline">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="section">
+                <h2 class="section-title glow-text">Education</h2>
+                <div class="card glass-card">
+                    <div class="education-header">
+                        <div class="education-info">
+                            <h3 class="degree">Bachelor of Science in Computer Science</h3>
+                            <p class="university">University of California, Berkeley</p>
+                        </div>
+                        <span class="duration glass-duration">2014 - 2018</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function downloadResume() {
+            // Mock download functionality - in a real app, this would download a PDF
+            const link = document.createElement('a');
+            link.href = '#'; // Would be the actual PDF URL
+            link.download = 'Alex_Johnson_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show a mock alert for demo purposes
+            alert('Resume download would start here! (This is a demo)');
+        }
+
+        // Add subtle animation on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const cards = document.querySelectorAll('.glass-card, .glass-container');
+            
+            cards.forEach((card, index) => {
+                const rate = scrolled * -0.1;
+                card.style.transform = `translateY(${rate * (index * 0.1)}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
